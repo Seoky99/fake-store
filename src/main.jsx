@@ -4,8 +4,9 @@ import "./styles.css";
 import Root from "./Root.jsx"
 import ErrorPage from './components/ErrorPage.jsx'
 import HomePage from "./components/HomePage.jsx"; 
-import ShopPage from './components/ShopPage.jsx';
-import ItemPage from './components/ItemPage.jsx';
+import ShopPage from './components/ShopComponents/ShopPage.jsx';
+import ItemPage from './components/ItemComponents/ItemPage.jsx';
+import CartPage from './components/CartComponents/CartPage.jsx';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             element: <ItemPage/>
           }
         ]
+      },
+      {
+        path: "cart",
+        element: <CartPage/>
       }
     ],
   }

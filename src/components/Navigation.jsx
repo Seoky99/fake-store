@@ -1,10 +1,11 @@
 import { Link, useLocation } from "react-router-dom"
 import styled from "styled-components";
-import Cart from "./Cart";
+import Cart from "./CartComponents/Cart";
 
 function Navigation({cartContents}) {
 
-    const isShop = useLocation().pathname.startsWith("/shop");
+    const path = useLocation().pathname; 
+    const showCart = path.startsWith("/shop") || path.startsWith("/cart");
 
     return (
         <NavWrapper>
@@ -13,7 +14,7 @@ function Navigation({cartContents}) {
                 <Link to="/shop">SHOP</Link>
             </LinkWrapper>
             <CartSlot>
-                {isShop && <Cart cartContents={cartContents}/>}
+                {showCart && <Cart cartContents={cartContents}/>}
             </CartSlot>
         </NavWrapper>
     );
@@ -25,6 +26,8 @@ const NavWrapper = styled.nav`
     justify-content: space-around;
     align-items: center;
     background-color: red;
+    position: sticky;
+    top: 0;
 `; 
 
 const CartSlot = styled.div`

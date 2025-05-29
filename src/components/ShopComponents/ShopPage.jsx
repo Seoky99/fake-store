@@ -12,9 +12,7 @@ function ShopPage() {
     const itemView = params.id !== undefined;      
 
     useEffect( () => {
-
-        //setTimeout(makeAFetch, 2000);
-
+        setTimeout(makeAFetch, 200);
         function makeAFetch() {
             fetch('https://fakestoreapi.com/products')
             .then(response => response.json())
@@ -22,7 +20,6 @@ function ShopPage() {
             .catch(err => {console.log(err); setError(true);})
             .finally(() => {setLoading(false);});
         }
-        makeAFetch(); 
     }, [])
 
     if (loading) {

@@ -1,13 +1,13 @@
 import { useOutletContext } from "react-router-dom";
 import { useContext, useState } from "react"; 
-import { CartContext } from "./CartContext";
+import { CartContext } from "../CartContext";
 import styled from "styled-components";
 import CustomInput from "./CustomInput";
 
 function ItemPage() {
 
     const data = useOutletContext();
-    const cartFunctions = useContext(CartContext);
+    const cartFunctions = useContext(CartContext).handleContents;
     const [ quantity, setQuantity ] = useState(0);
     const {title, price, image, category, id } = data; 
 

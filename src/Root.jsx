@@ -22,7 +22,22 @@ function Root() {
     const [ cartContents, setCartContents ] = useState(initialContents);
 
     function handleContents(cartItemID, itemQuantity, itemTitle) {
-        setCartContents([...cartContents, {itemID: cartItemID, quantity: itemQuantity, title: itemTitle}]);
+        let newCart = [...cartContents]; 
+
+        let found = false; 
+        newCart = newCart.map(item => {
+            if (item.itemID === cartItemID) {
+                found = true; 
+                return {...item, quantity: Number(item.quantity) + Number(itemQuantity)};
+            } else {
+                return item; 
+            }
+        })
+
+        if (!found) {
+            newCart.push({itemID: cartItemID, quantity: itemQuantity, title: itemTitle});
+        }
+        setCartContents(newCart);
     }
 
     return(
@@ -30,7 +45,7 @@ function Root() {
             <Header/> 
             <Navigation cartContents={cartContents}/>
             <h3>Below changes on url change:</h3>
-            <CartContext.Provider value={handleContents}>
+            <CartContext.Provider value={{handleContents, cartContents}}>
                 <Outlet/>
             </CartContext.Provider>
         </>
