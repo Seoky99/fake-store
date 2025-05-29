@@ -7,7 +7,7 @@ function ShopPage() {
     const [loading, setLoading] = useState(true); 
     const [error, setError] = useState(false);
     const [data, setData] = useState(null); 
-    
+
     const params = useParams(); 
     const itemView = params.id !== undefined;      
 
