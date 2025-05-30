@@ -1,17 +1,26 @@
 import { useContext } from "react"; 
-import { CartContext } from "../CartContext"; 
+import { ItemsContext, ItemsDispatchContext } from "../ItemsContext"; 
 import styled from "styled-components"; 
 
 function CartPage() {
 
-    const contents = useContext(CartContext).cartContents;
-    const items = contents.map(item => {
+    const cartContents = useContext(ItemsContext); 
+    const dispatch = useContext(ItemsDispatchContext);  
+
+    function handleDelete(cartItemID) {
+        dispatch({
+            type: 'delete', 
+            cartItemID: cartItemID, 
+        })
+    }
+
+    const items = cartContents.map(item => {
         return (
-            <Item>
-                <h4 key={`${item.id}`}>{item.title}</h4>
+            <Item key={`${item.itemID}`}>
+                <h4>{item.title}</h4>
                 <InteractableContainer>
                     <h5> Quantity:{item.quantity}</h5>
-                    <DeleteButton><span class="material-symbols-outlined">delete</span></DeleteButton>
+                    <DeleteButton onClick={() => handleDelete(item.itemID)}><span className="material-symbols-outlined">delete</span></DeleteButton>
                 </InteractableContainer>
             </Item>
         );

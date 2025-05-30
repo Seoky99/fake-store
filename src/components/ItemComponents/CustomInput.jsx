@@ -1,7 +1,7 @@
 function CustomInput({customValue, setCustomValue}) {
 
     return (
-        <input type="number" value={customValue} onChange={setCustomValue}></input>
+        <input type="number" min="1" value={customValue} onChange={setCustomValue}></input>
     );
 }
 

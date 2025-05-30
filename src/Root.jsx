@@ -1,8 +1,27 @@
 import Navigation from "./components/Navigation.jsx";
 import Header from "./components/Header.jsx"
 import { Outlet } from "react-router-dom";
-import { useState } from "react"; 
-import { CartContext } from "./components/CartContext.js";
+import { useReducer } from "react"; 
+import { ItemsContext, ItemsDispatchContext } from "./components/ItemsContext.js";
+
+function Root() {
+
+    const [ items, dispatch ] = useReducer(itemsReducer, initialContents);
+
+    return(
+        <>
+            <Header/> 
+            <Navigation cartContents={items}/>
+            <h3>Below changes on url change:</h3>
+            <ItemsContext.Provider value={items}>
+                <ItemsDispatchContext.Provider value={dispatch}>
+                    <Outlet/>
+                </ItemsDispatchContext.Provider>
+            </ItemsContext.Provider>
+        </>
+    );
+}
+
 
 const initialContents = [
     {
@@ -17,39 +36,30 @@ const initialContents = [
     }
 ]
 
-function Root() {
+function itemsReducer(items, action) {
+    switch(action.type) {
+        case 'add': {
+            let newCart = [...items]; 
 
-    const [ cartContents, setCartContents ] = useState(initialContents);
+            let found = false; 
+            newCart = newCart.map(item => {
+                if (item.itemID === action.cartItemID) {
+                    found = true; 
+                    return {...item, quantity: Number(item.quantity) + Number(action.itemQuantity)};
+                } else {
+                    return item; 
+                }
+            })
 
-    function handleContents(cartItemID, itemQuantity, itemTitle) {
-        let newCart = [...cartContents]; 
-
-        let found = false; 
-        newCart = newCart.map(item => {
-            if (item.itemID === cartItemID) {
-                found = true; 
-                return {...item, quantity: Number(item.quantity) + Number(itemQuantity)};
-            } else {
-                return item; 
+            if (!found) {
+                newCart.push({itemID: action.cartItemID, quantity: action.itemQuantity, title: action.itemTitle});
             }
-        })
-
-        if (!found) {
-            newCart.push({itemID: cartItemID, quantity: itemQuantity, title: itemTitle});
+            return newCart;
+        } case 'delete': {
+            return items.filter(item => !(Number(action.cartItemID) === Number(item.itemID)))
         }
-        setCartContents(newCart);
     }
-
-    return(
-        <>
-            <Header/> 
-            <Navigation cartContents={cartContents}/>
-            <h3>Below changes on url change:</h3>
-            <CartContext.Provider value={{handleContents, cartContents}}>
-                <Outlet/>
-            </CartContext.Provider>
-        </>
-    );
 }
+
 
 export default Root; 

@@ -1,22 +1,28 @@
 import { useOutletContext } from "react-router-dom";
 import { useContext, useState } from "react"; 
-import { CartContext } from "../CartContext";
+import { ItemsDispatchContext } from "../ItemsContext";
 import styled from "styled-components";
 import CustomInput from "./CustomInput";
 
 function ItemPage() {
 
     const data = useOutletContext();
-    const cartFunctions = useContext(CartContext).handleContents;
-    const [ quantity, setQuantity ] = useState(0);
-    const {title, price, image, category, id } = data; 
+    const dispatch = useContext(ItemsDispatchContext);
+
+    const [ quantity, setQuantity ] = useState(1);
+    const { title, price, image, category, id } = data; 
 
     function handleQuantity(e) {
         setQuantity(e.target.value); 
     }
 
     function handlePurchase() {
-        cartFunctions(id, quantity, title); 
+        dispatch({
+            type: 'add',
+            cartItemID: id, 
+            itemQuantity: quantity, 
+            itemTitle: title,
+        });
     }
 
     return (
