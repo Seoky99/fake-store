@@ -10,10 +10,14 @@ function ItemPage() {
     const dispatch = useContext(ItemsDispatchContext);
 
     const [ quantity, setQuantity ] = useState(1);
-    const { title, price, image, category, id } = data; 
+    const { title, price, image, id, description } = data; 
 
     function handleQuantity(e) {
         setQuantity(e.target.value); 
+    }
+
+    function handleQuantityButton(e) {
+        e.target.name === 'inc' ? setQuantity(prev => prev+1) : setQuantity(prev => prev > 1 ? prev-1 : prev);
     }
 
     function handlePurchase() {
@@ -29,7 +33,7 @@ function ItemPage() {
         <Page>
             <Showcase>
                 <StyledCard>
-                    <img src={`${image}`} alt="Image not found" width="300px"></img>
+                    <img src={`${image}`} alt="Image not found"></img>
                 </StyledCard>
                 <ButtonContainer>
                     <button>LEFT</button>
@@ -37,12 +41,18 @@ function ItemPage() {
                 </ButtonContainer>
             </Showcase>
             <UserInterface>
-                <h3>{title}</h3>
-                <h3>{price}$</h3>
-                <h6>{category}</h6>
-                <label htmlFor="quantity">Quantity</label>
-                <CustomInput customValue={quantity} setCustomValue={handleQuantity}></CustomInput>
-                <button onClick={handlePurchase}>Buy now!</button>
+                <ItemDescription>
+                    <ItemTitle>{title}</ItemTitle>
+                    <ItemPrice>{price}$</ItemPrice>
+                    <p>{description}</p>
+                </ItemDescription>
+                <QuantityContainer>
+                    <label htmlFor="quantity">Quantity:</label>
+                    <button className={quantityButtonRules} name="dec" onClick={handleQuantityButton}>-</button>
+                    <CustomInput customValue={quantity} setCustomValue={handleQuantity}></CustomInput>
+                    <button className={quantityButtonRules} name="inc" onClick={handleQuantityButton}>+</button>
+                </QuantityContainer>
+                <PurchaseButton onClick={handlePurchase} type="button" className={purchaseButtonRules}>Purchase</PurchaseButton>
             </UserInterface>
         </Page>
     );
@@ -51,36 +61,75 @@ function ItemPage() {
 const Page = styled.div`
     display: flex; 
     width: 100%;
-    justify-content: space-around;
-    background-color: coral;
+    justify-content: center;
 `
 const Showcase = styled.div`
     display: flex;
-    width: 60%;
+    width: 40%;
     align-items: center;
     flex-direction: column;
-    background-color: blue;  
     padding: 2rem; 
 `
+
+const StyledCard = styled.button`
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+    padding: 10px;
+    max-width: 300px;
+`;
+
 const UserInterface = styled.div`
     display: flex; 
     flex-direction: column; 
-    background-color: red; 
     padding: 2rem;
+    gap: 1rem;
+`
+
+const ItemTitle = styled.h3`
+    font-size: 1.9rem; 
+    font-weight: 800;
+`
+
+const ItemPrice = styled.p`
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+`
+
+const ItemDescription = styled.div`
+    display: flex;
+    flex-direction: column; 
+    padding-bottom: 5px;
+    border-bottom: 2px solid black;    
+    max-width: 45ch;
 `
 const ButtonContainer = styled.div`
     display: flex; 
     justify-content: space-around;
-    background-color: red;
     width: 100%;
     padding: 2rem;
 `
-const StyledCard = styled.button`
-    display: flex;
-    flex-direction: column; 
-    background-color: red;
-    gap: 20px;
-    padding: 10px;
-`;
 
+const QuantityContainer = styled.div`
+    display: flex; 
+    gap: 0.4rem;
+    align-items: center;
+    margin-top: 3rem;
+
+    label {
+        margin-right: 1rem; 
+    }
+
+    button {
+        font-weight: bold;
+    }
+`
+
+const PurchaseButton = styled.button`
+    height: 3rem;
+    width: 10rem;
+`
+const purchaseButtonRules = "cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2";
+const quantityButtonRules = "w-8 bg-gray-200 border border-transparent text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5";
+ 
 export default ItemPage; 

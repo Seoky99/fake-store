@@ -1,16 +1,5 @@
 import styled from "styled-components"
 
-const HeaderWrapper = styled.div`
-    display: flex;
-    background-color: coral;
-    justify-content: center;
-    font-size: 3rem;
-    
-    h1 {
-        font-family: "playfair_displaybold";
-    }
-`;
-
 function Header() {
     return (
         <HeaderWrapper>
@@ -18,5 +7,17 @@ function Header() {
         </HeaderWrapper>
     );
 }
+
+const HeaderWrapper = styled.div`
+    display: flex;
+    background-color: coral;
+    justify-content: center;
+    font-size: 3rem;
+    padding: 2rem;
+    
+    h1 {
+        font-family: "playfair_displaybold";
+    }
+`;
 
 export default Header; 

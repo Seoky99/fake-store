@@ -11,6 +11,7 @@ function Footer() {
 
 const FooterContainer = styled.div`
     background-color: black;
+    margin-top: auto;
 `;
 
 export default Footer; 

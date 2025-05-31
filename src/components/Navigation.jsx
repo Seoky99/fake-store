@@ -21,7 +21,7 @@ function Navigation({cartContents}) {
 }
 
 const NavWrapper = styled.nav`
-    padding: 10px; 
+    padding: 20px; 
     display: flex;
     justify-content: space-around;
     align-items: center;
