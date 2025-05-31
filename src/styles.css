@@ -1,7 +1,31 @@
-/**Global styles **/ 
+/**Global styles **/
+@import "tailwindcss";
+
+@font-face {
+    font-family: 'playfair_displaybold';
+    src: url('../fonts/playfairdisplay-bold-webfont.woff2') format('woff2'),
+         url('../fonts/playfairdisplay-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'playfair_displayregular';
+    src: url('../fonts/playfairdisplay-regular-webfont.woff2') format('woff2'),
+         url('../fonts/playfairdisplay-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: "playfair_displayregular";
+}
+
+/*  Helvetica, "Trebuchet MS", Verdana, sans-serif; */
 
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box; 
+    height: 100vh;
 }

@@ -1,13 +1,6 @@
-import Card from "../Card";
+import Card from "./Card";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
-
-const CardWrapper = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
-`
 
 function ShopList({data}) {
 
@@ -27,5 +20,12 @@ function ShopList({data}) {
         </CardWrapper>
     )
 }
+
+const CardWrapper = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 10px;
+`
 
 export default ShopList; 

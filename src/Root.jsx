@@ -1,5 +1,6 @@
 import Navigation from "./components/Navigation.jsx";
 import Header from "./components/Header.jsx"
+import Footer from "./components/Footer.jsx"
 import { Outlet } from "react-router-dom";
 import { useReducer } from "react"; 
 import { ItemsContext, ItemsDispatchContext } from "./components/ItemsContext.js";
@@ -18,6 +19,7 @@ function Root() {
                     <Outlet/>
                 </ItemsDispatchContext.Provider>
             </ItemsContext.Provider>
+            <Footer/>
         </>
     );
 }

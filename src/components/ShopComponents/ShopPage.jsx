@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"; 
 import { Outlet, useParams } from "react-router-dom";
+import styled from "styled-components";
 import ShopList from "./ShopList";
+import Sidebar from "./Sidebar";
 
 function ShopPage() {
 
@@ -16,8 +18,8 @@ function ShopPage() {
         function makeAFetch() {
             fetch('https://fakestoreapi.com/products')
             .then(response => response.json())
-            .then(data => {console.log("THEN data fetching here"); console.log(data); setData(data);})
-            .catch(err => {console.log(err); setError(true);})
+            .then(data => {setData(data);})
+            .catch(err => { console.log(err); setError(true);})
             .finally(() => {setLoading(false);});
         }
     }, [])
@@ -37,10 +39,15 @@ function ShopPage() {
     return (
         <>
             <h1>This is the shop page</h1>
-            {!loading && !itemView && <ShopList data={data}/>}
+            {!loading && !itemView && <ShopContent><Sidebar></Sidebar><ShopList data={data}/></ShopContent>}
             {itemView && <Outlet context={returnCorrectItem(data, Number(params.id))}></Outlet>}
         </>
     );
 }
+
+const ShopContent = styled.div`
+    display: flex;
+    padding: 1.5rem;
+`
 
 export default ShopPage;

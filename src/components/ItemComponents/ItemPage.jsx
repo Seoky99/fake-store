@@ -78,7 +78,7 @@ const ButtonContainer = styled.div`
 const StyledCard = styled.button`
     display: flex;
     flex-direction: column; 
-    background-color: skyblue;
+    background-color: red;
     gap: 20px;
     padding: 10px;
 `;
