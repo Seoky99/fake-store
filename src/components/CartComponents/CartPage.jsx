@@ -1,5 +1,6 @@
 import { useContext } from "react"; 
-import { ItemsContext, ItemsDispatchContext } from "../ItemsContext"; 
+import { ItemsContext, ItemsDispatchContext } from "../ItemsContext";
+import NoItems from "./NoItems"; 
 import { styled, css } from "styled-components"; 
 
 function CartPage() {
@@ -8,6 +9,7 @@ function CartPage() {
     const dispatch = useContext(ItemsDispatchContext);  
 
     let total = 0;
+    const cartEmpty = cartContents.length === 0; 
 
     const items = cartContents.map(item => {
         const subtotal = (Math.round((Number(item.price) * Number(item.quantity)) * 100)/100).toFixed(2); 
@@ -43,6 +45,7 @@ function CartPage() {
                     <p>Subtotal</p>
                 </ItemLabel>
                 {items}
+                {cartEmpty && <NoItems/>}
             </ItemContainer>
             <CheckoutContainer>
                 <p>Your total is: {total}$</p>
@@ -108,6 +111,11 @@ const DeleteButton = styled.button`
     height: 40px;
     background-color: black;
     color: white;   
+    cursor: pointer;
+
+    span {
+        vertical-align: middle;
+    }
 `
 
 const CheckoutContainer = styled.div`

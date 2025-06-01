@@ -35,8 +35,6 @@ function ItemPage() {
                     <img src={`${image}`} alt="Image not found"></img>
                 </StyledCard>
                 <ButtonContainer>
-                    <button>LEFT</button>
-                    <button>RIGHT</button>
                 </ButtonContainer>
             </Showcase>
             <UserInterface>
