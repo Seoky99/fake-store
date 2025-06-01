@@ -10,7 +10,7 @@ function ItemPage() {
     const dispatch = useContext(ItemsDispatchContext);
 
     const [ quantity, setQuantity ] = useState(1);
-    const { title, price, image, id, description } = data; 
+    const { title, price, image, description } = data; 
 
     function handleQuantity(e) {
         setQuantity(e.target.value); 
@@ -23,9 +23,8 @@ function ItemPage() {
     function handlePurchase() {
         dispatch({
             type: 'add',
-            cartItemID: id, 
-            itemQuantity: quantity, 
-            itemTitle: title,
+            quantity: quantity,
+            item: {...data},
         });
     }
 

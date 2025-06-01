@@ -19,7 +19,7 @@ function Card({cardInfo, handleClick}) {
     );
 }
 
-const StyledCard = styled.button`
+const StyledCard = styled.div`
     display: flex;
     flex-direction: column; 
     background-color: white;
@@ -33,6 +33,16 @@ const StyledCard = styled.button`
     h3 {
         font-size: 1.2rem;
         height: 100px; 
+    }
+
+    animation: fade 0.5s ease-in;
+
+    @keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 `;
 
@@ -53,7 +63,7 @@ const ImageContainer = styled.div`
 
 const ItemDescriptionContainer = styled.div`
     height: 150px;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     border-bottom: 1px solid black;
     width: 100%;
     display: flex;

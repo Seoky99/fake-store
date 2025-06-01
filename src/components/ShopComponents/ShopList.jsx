@@ -25,7 +25,8 @@ const CardWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1rem;
-    padding: 10px;
+    padding: 20px;
+    width: 100%;
 `
 
 export default ShopList; 
